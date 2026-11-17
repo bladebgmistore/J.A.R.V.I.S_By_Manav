@@ -36,7 +36,16 @@ jobs:
         run: flutter pub get
 
       - name: Build installable debug APK
-        run: flutter build apk --debug
+        shell: bash
+        run: |
+          set -o pipefail
+          flutter build apk --debug 2>&1 | tee "$RUNNER_TEMP/apk-build.log" || {
+            echo '### APK build failure details' >> "$GITHUB_STEP_SUMMARY"
+            echo '```text' >> "$GITHUB_STEP_SUMMARY"
+            cat "$RUNNER_TEMP/apk-build.log" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          }
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
