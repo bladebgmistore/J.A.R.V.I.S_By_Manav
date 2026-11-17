@@ -44,6 +44,9 @@ jobs:
             echo '```text' >> "$GITHUB_STEP_SUMMARY"
             cat "$RUNNER_TEMP/apk-build.log" >> "$GITHUB_STEP_SUMMARY"
             echo '```' >> "$GITHUB_STEP_SUMMARY"
+            grep -E '(^FAILURE:|^\* What went wrong:|^e: |^Error:|Execution failed|Could not resolve|A problem occurred)' "$RUNNER_TEMP/apk-build.log" | head -20 | while IFS= read -r line; do
+              echo "::error title=APK build diagnostic::$line"
+            done
             exit 1
           }
 
