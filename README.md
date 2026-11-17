@@ -5,6 +5,12 @@
 ### **Autonomous, Self-Evolving On-Device AI Assistant & Android UI Automation Agent**
 
 > Branding fork of [Jarvis by AbuZar Ansarii](https://github.com/AbuZar-Ansarii/Jarvis). Upstream MIT copyright and license are retained in `LICENSE`; see `NOTICE`.
+
+## Android APK / build
+
+This is a **Flutter** project, not a plain Android/Gradle-only project. To build locally, use an environment with Flutter SDK, Android SDK, and Java 17; from the repository root run `flutter pub get` then `flutter build apk --debug`. The installable APK is written to `build/app/outputs/flutter-apk/app-debug.apk`.
+
+The repository also builds an APK via GitHub Actions. After a successful **Build Android APK** workflow run, download the `jarvis-by-manav-android-apk` artifact from that run. In an IDE that imports Gradle projects, open the `android/` subdirectory, not the repository root; this Android module still requires a configured Flutter SDK. IDEs that do not support Flutter cannot run this source project directly.
 *Architected and Engineered with Precision by **Abuzar***
 
 ---
